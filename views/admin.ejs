@@ -11,12 +11,11 @@
 
    <div class="container">
   <div class="row justify-content-md-center">
- <div class="col col-sm-8">
+ <div class="col col-sm-10">
 
    <table class="table table-striped" style="table-layout: fixed;word-wrap: break-word;">
      <thead>
        <tr>
-         <th scope="col">#</th>
          <th scope="col">Name</th>
          <th scope="col">Email</th>
          <th scope="col">Message</th>
@@ -27,7 +26,6 @@
 
         <% for(var i=0; i<list.length;i++){ %>
            <tr>
-           <th scope="row"><%= i %></th>
           <td><%= list[i].name %></td>
           <td><%= list[i].email %></td>
           <td><%= list[i].message %></td>
