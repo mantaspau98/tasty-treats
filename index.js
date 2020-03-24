@@ -11,26 +11,52 @@ app.get('/', (req,res)=>{
 });
 
 app.post('/', (req,res)=>{
+	if(req.body.name2){
+		res.write('No bots allowed');
+		res.end();
+}else{
 	var objectToWrite ={
 		name: req.body.name,
 		email: req.body.email,
 		message: req.body.message,
 		newsletter: req.body.newsletter
 	}
+
 crypto.randomBytes(35,(err, buf) => {
 	fs.writeFile("./submissions/"+buf.toString('hex'), JSON.stringify(objectToWrite),function(err){
 		if(err)
-			console.log(err);
+			return console.log(err);
 
-		res.render('index');
+		res.render('submitSucess');
 
 	});
 });
+}
 });
 
+
+
 app.get('/admin', (req,res)=>{
-	//get all submissions from files and return list to a view
-	res.render('admin');
+	let list = [];
+	fs.readdir("./submissions", function (err, files) {
+    if (err)
+        return console.log(err);
+
+
+		  let requests = files.map((file) => {
+		      return new Promise((resolve) => {
+					fs.readFile("./submissions/"+file, "utf8", (err, data) => {
+						list.push(JSON.parse(data));
+					 resolve();
+				})
+		      });
+		  })
+
+Promise.all(requests).then(() => res.render('admin',{list:list}));
+
+
+});
+
 });
 
 
