@@ -1,55 +1,37 @@
 <head>
    <meta charset="utf-8">
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<title>Admin panel</title>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+   <title>Admin panel</title>
 </head>
 
 <body>
-
-
-
    <div class="container">
-  <div class="row justify-content-md-center">
- <div class="col col-sm-10">
+      <div class="row justify-content-md-center">
+         <div class="col col-sm-10">
 
-   <table class="table table-striped" style="table-layout: fixed;word-wrap: break-word;">
-     <thead>
-       <tr>
-         <th scope="col">Name</th>
-         <th scope="col">Email</th>
-         <th scope="col">Message</th>
-         <th scope="col">Newsletter</th>
-       </tr>
-     </thead>
-     <tbody>
+            <table class="table table-striped" style="table-layout: fixed;word-wrap: break-word;">
+               <thead>
+                  <tr>
+                     <th scope="col">Name</th>
+                     <th scope="col">Email</th>
+                     <th scope="col">Message</th>
+                     <th scope="col">Newsletter</th>
+                  </tr>
+               </thead>
+               <tbody>
 
-        <% for(var i=0; i<list.length;i++){ %>
-           <tr>
-          <td><%= list[i].name %></td>
-          <td><%= list[i].email %></td>
-          <td><%= list[i].message %></td>
-           <td><% if(list[i].newsletter) {%> Yes <% }else{%>No<%}%></td>
-
-
- </tr>
-        <%}%>
-
-
-
-
-
-
-     </tbody>
-   </table>
-</div>
+                  <% for(var i=0; i<list.length;i++){ %>
+                  <tr>
+                     <td><%= list[i].name %></td>
+                     <td><%= list[i].email %></td>
+                     <td><%= list[i].message %></td>
+                     <td><% if(list[i].newsletter) {%> Yes <% }else{%>No<%}%></td>
+                  </tr>
+                  <%}%>
+               </tbody>
+            </table>
+         </div>
+      </div>
    </div>
-   </div>
-
-
-
-
-
-
-
 </body>
