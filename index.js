@@ -10,24 +10,6 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-// Certificate
-const privateKey = fs.readFileSync('/etc/letsencrypt/live/livestream.gq/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/etc/letsencrypt/live/livestream.gq/cert.pem', 'utf8');
-const ca = fs.readFileSync('/etc/letsencrypt/live/livestream.gq/chain.pem', 'utf8');
-
-const credentials = {
-    key: privateKey,
-    cert: certificate,
-    ca: ca
-};
-
-app.use(function(req, res, next) {
-    if(!req.secure) {
-        return res.redirect(['https://', req.get('Host'), req.url].join(''));
-    }
-    next();
-});
-
 app.get('/', (req, res) => {
     res.render('index');
 });
@@ -54,8 +36,6 @@ app.post('/', (req, res, next) => {
         });
     }
 });
-
-
 
 app.get('/admin', (req, res, next) => {
     let list = [];
@@ -89,14 +69,10 @@ app.use((error, req, res, next) => {
 });
 
 
-// http and https servers
+// http server
 const httpServer = http.createServer(app);
-const httpsServer = https.createServer(credentials, app);
 
 httpServer.listen(8080, () => {
     console.log('HTTP Server running on port 8080');
 });
 
-httpsServer.listen(8081, () => {
-    console.log('HTTPS Server running on port 8081');
-});
